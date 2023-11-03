@@ -11,7 +11,6 @@ public class ChungrimApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ChungrimApplication.class, args);
-        System.out.println("잘될까?");
     }
 
 }
