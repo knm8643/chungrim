@@ -1,6 +1,6 @@
 package com.tsib.chungrim.dto;
 
-public class MemberDto {
+public class MemberDTO {
     private String loginpass;
     private String checkid;
     private String checkpw;

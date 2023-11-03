@@ -1,28 +1,62 @@
 package com.tsib.chungrim.controller;
 
-import com.tsib.chungrim.dto.MemberDto;
+import com.tsib.chungrim.dto.MemberDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin("*")
 public class MemberController {
+    private MemberDTO sharedMember;
 
-    @RequestMapping("/memberJoin")
+    // 회원관련 로직
+    @PostMapping("/memberJoin")
     @ResponseBody
-    public String memberJoin() {
-        System.out.println("회원가입");
-        return "성공";
+    public String memberJoin(@RequestBody MemberDTO MemberDto) {
+        if (sharedMember == null) {
+            // 회원가입 로직은 디비 생기면 더 로직개선 필요
+            sharedMember = MemberDto;
+            return "Y";
+        } else {
+            System.out.println("임시 회원가입이라 두번가입은 불가능합니다");
+        }
+        return "Success";
     }
 
     @PostMapping("/memberLogin")
     @ResponseBody
-    public String memberLogin(@RequestBody MemberDto MemberDto) {
-        String loginpass = MemberDto.getLoginpass();
-        String checkid = MemberDto.getCheckid();
-        String checkpw = MemberDto.getCheckpw();
+    public String memberLogin(@RequestBody MemberDTO MemberDto) {
+        if (sharedMember != null) {
+            if(sharedMember.getCheckid().equals(MemberDto.getCheckid())){
+                System.out.println("아이디가 일치합니다");
+            }else {
+                System.out.println("아이디가 일치하지않습니다.");
+                return "N";
+            }
 
-        System.out.println(loginpass + checkid + checkpw);
-        return "성공";
+            if(sharedMember.getCheckpw().equals(MemberDto.getCheckpw())){
+                System.out.println("비밀번호가 일치합니다");
+                return "Y";
+            }else {
+                System.out.println("비밀번호가 일치하지않습니다.");
+                return "N";
+            }
+        } else {
+            System.out.println("회원가입 정보가 없습니다.");
+        }
+        return "Success";
     }
+    @GetMapping("/memberFind")
+    @ResponseBody
+    public String memberFind() {
+        if (sharedMember == null) {
+            // 회원가입 로직은 디비 생기면 더 로직개선 필요
+            System.out.println("찾을 정보가 없습니다.");
+        } else {
+            return sharedMember.getCheckid() +" | "+ sharedMember.getCheckpw();
+        }
+        return "Success";
+    }
+
 }
