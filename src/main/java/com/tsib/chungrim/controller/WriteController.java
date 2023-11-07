@@ -21,7 +21,7 @@ public class WriteController {
             @RequestParam("previewImage") MultipartFile previewImage
     ) {
         if (markdownText.isEmpty() || tags.isEmpty() || previewImage.isEmpty()) {
-            return "Error: Required fields are missing.";
+            return "입력한 값중 하나가 비어있군요 자바단에서 세부 코드 다시 작성하시길~";
         } else {
             // 처리 로직
             return "Success";
