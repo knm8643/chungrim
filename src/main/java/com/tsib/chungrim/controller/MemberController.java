@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class MemberController {
     private MemberDTO sharedMember;
-
     // 회원관련 로직
     @PostMapping("/memberJoin")
     @ResponseBody
