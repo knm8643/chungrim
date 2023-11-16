@@ -1,18 +1,33 @@
 package com.tsib.chungrim.controller;
 
+import com.tsib.chungrim.dao.MemberDAO;
 import com.tsib.chungrim.dto.MemberDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin("*")
 public class MemberController {
+
+    @Autowired
+    private MemberDAO memberDAO;
+
     private MemberDTO sharedMember;
     // 회원관련 로직
     @PostMapping("/memberJoin")
     @ResponseBody
     public String memberJoin(@RequestBody MemberDTO MemberDto) {
+        System.out.println(MemberDto);
+        System.out.println(MemberDto.getCheckid());
+        System.out.println(MemberDto.getCheckpw());
+        System.out.println(MemberDto.getLoginpass());
+
+        String id = MemberDto.getCheckid();
+        String pw = MemberDto.getCheckpw();
+
+        memberDAO.test(id, pw);
         if (sharedMember == null) {
             // 회원가입 로직은 디비 생기면 더 로직개선 필요
             sharedMember = MemberDto;
