@@ -6,4 +6,10 @@
         insert into yuch_nug.member (id, pw)
         values (#{id}, #{pw});
     </insert>
+
+    <select id="selectId">
+        select * from yuch_nug.member
+        where id = #{id}
+        and pw = #{pw};
+    </select>
 </mapper>

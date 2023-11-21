@@ -17,4 +17,13 @@ public class MemberDAO {
         return memberMapper.test(id, pw);
     }
 
+    public int selectId(String id, String pw){
+        int test = memberMapper.selectId(id, pw);
+        System.out.println(test);
+        System.out.println(id + pw);
+
+
+        return memberMapper.selectId(id, pw);
+    }
+
 }

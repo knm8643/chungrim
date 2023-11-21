@@ -41,6 +41,13 @@ public class MemberController {
     @PostMapping("/memberLogin")
     @ResponseBody
     public String memberLogin(@RequestBody MemberDTO MemberDto) {
+
+        System.out.println(MemberDto.getCheckid());
+        System.out.println(MemberDto.getCheckpw());
+
+        String id = MemberDto.getCheckid();
+        String pw = MemberDto.getCheckpw();
+
         if (sharedMember != null) {
             if(sharedMember.getCheckid().equals(MemberDto.getCheckid())){
                 System.out.println("아이디가 일치합니다");
