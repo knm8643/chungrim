@@ -18,8 +18,14 @@ public class MemberDAO {
     }
 
     public int selectId(String id, String pw){
-        int test = memberMapper.selectId(id, pw);
-        System.out.println(test);
+        Integer test = memberMapper.selectId(id, pw);
+
+        if (test != null) {
+            System.out.println(test.intValue());
+        } else {
+            System.out.println("Value is null");
+        }
+
         System.out.println(id + pw);
 
 
